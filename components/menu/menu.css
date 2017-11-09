@@ -1,0 +1,65 @@
+.menu {
+    position: relative;
+    padding-left: 0.9rem;
+}
+
+.menu__title {
+    position: relative;
+    margin: 0;
+    font-size: 1em;
+    cursor: pointer;
+    border-bottom-width: 0;
+    border-color: #aaa;
+    border-color: rgba(0,0,0,0.3);
+    border-bottom-style: dotted;
+    color: #000;
+}
+
+.menu_close .menu__title {
+    border-bottom-width: 1px;
+}
+
+.menu__title:before {
+    content: '▼';
+    position: absolute;
+    right: 100%;
+    top: 0.2em;
+    display: inline-block;
+    width: 0.9rem;
+    color: tomato;
+    font-size: 0.65em;
+    vertical-align: middle;
+}
+
+.menu_close .menu__title:before {
+    content: '▶';
+    color: green;
+}
+
+.menu__list {
+    margin-top: 0.55em;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.menu__item {
+    cursor: pointer;
+    color: #00f;
+    text-decoration: none;
+    margin-top: 0.35em;
+}
+
+.menu__item_selected {
+    color: tomato;
+}
+
+.menu_close .menu__list {
+    overflow: hidden;
+    position: absolute;
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    border: 0;
+}

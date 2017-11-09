@@ -1,0 +1,40 @@
+{
+  "extends": "airbnb/base",
+  "rules": {
+
+    // Эта настройка вынуждает использовать табы вместо пробелов
+    // Уберите её, если такой подход вас не устраиват :))
+    "indent": [2, "tab", {"SwitchCase": 1}],
+
+    "eqeqeq": 0,
+    "comma-dangle": [1, "always-multiline"],
+    "quote-props": 0,
+    "no-else-return": 0,
+    "no-param-reassign": 0,
+    "space-infix-ops": [2, {"int32Hint": true}],
+    "no-unused-expressions": [2, {"allowShortCircuit": true, "allowTernary": true}],
+    "object-curly-spacing": [2, "never"],
+    "strict": 0,
+    "spaced-comment": 0,
+    "wrap-iife": ["error", "inside"],
+    "max-len": ["error", 140],
+    "no-cond-assign": ["error", "except-parens"],
+    "import/no-unresolved": 0,
+    "prefer-rest-params": 0,
+    "no-console": 0,
+    "global-require": 0,
+    "no-underscore-dangle": 0,
+    "prefer-template": 0,
+    "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "consistent-return": 0,
+    "new-cap": 0,
+    "no-case-declarations": 0,
+    "default-case": 0
+  },
+  "parserOptions":{
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  }
+}

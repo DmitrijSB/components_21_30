@@ -55,12 +55,12 @@
 
 			this.data.items.forEach(itemData => {
 				let item = document.createElement('li');
-			item.classList.add('menu__item');
-			item.classList.add('pure-menu-link');
+				item.classList.add('menu__item');
+				item.classList.add('pure-menu-link');
 
-			item.innerHTML = itemData.anchor;
-			list.appendChild(item);
-		});
+				item.innerHTML = itemData.anchor;
+				list.appendChild(item);
+			});
 
 			this.el.appendChild(title);
 			this.el.appendChild(list);

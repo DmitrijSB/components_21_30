@@ -20,4 +20,8 @@
 		el: document.querySelector('.js-menu'),
 		data,
 	});
+
+	let form = new Form({
+		el: document.querySelector('.js-form'),
+	});
 })();

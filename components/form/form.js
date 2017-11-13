@@ -1,36 +1,82 @@
 (function () {
 	'use strict';
 
+
+	/**
+	 * @class Form
+	 * Компонента "Форма"
+	 */
 	class Form {
-		constructor(options) {
-			this.el = options.el;
+		/**
+		 * @constructor
+		 * @param  {Object} opts
+		 */
+		constructor({el, data, onSubmit}) {
+			this.el = el;
+			this.data = data;
+			this.onSubmit = onSubmit;
 
-			this._initEvent();
 			this.render();
+			this._initEvents();
 		}
 
-		_initEvent() {
-
-		}
-
-		template() {
-			return `
-				<form>
-					<fieldset>
-						<input type="text" name="url" placeholder="url"/>
-						<input type="text" name="anchor" placeholder="!!!!!"/>
-						<button type="submit">Добавить</button>
-					</fieldset>
-				</form>
-			`;
-		}
-
+		/**
+		 * Создаем HTML
+		 */
 		render() {
-			const template = this.template();
+			this.el.innerHTML = `
+			<form class="form pure-form">
+				<fieldset>
+					<input class="form__input"
+						type="url" name="href"
+						required="required"
+						placeholder="url"/>
+					
+					<input class="form__input"
+						type="text" name="anchor"
+						required="required"
+						placeholder="anchor"/>
+					<button class="form__btn pure-button" type="submit">
+						Save
+					</button>
+					
+				</fieldset>
+			</form>`;
+		}
 
-			this.el.innerHTML = template;
+
+		/**
+		 * Получение элемента формы по имени
+		 * @param  {string} name
+		 * @return {HTMLElement}
+		 */
+		getField(name) {
+			return this.el.querySelector(`[name="${name}"]`);
+		}
+
+
+		/**
+		 * Развешиваем события
+		 */
+		_initEvents() {
+			this.el.addEventListener('submit', this._onSubmit.bind(this));
+		}
+
+
+		/**
+		 * Отправка данных формы
+		 * @param {Event} event
+		 * @private
+		 */
+		_onSubmit(event) {
+			event.preventDefault();
+
+			this.onSubmit(this);
+			event.target.reset();
 		}
 	}
 
+
+	//export
 	window.Form = Form;
 })();

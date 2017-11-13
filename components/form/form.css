@@ -1,0 +1,13 @@
+.form {
+    padding: 0 20px;
+}
+
+.form__input {
+    margin-right: 5px;
+    width: 150px;
+}
+
+.form__btn {
+    background-color: #be1622;
+    color: rgba(255,255,255,1.0);
+}

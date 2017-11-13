@@ -1,27 +1,47 @@
 (function () {
 	'use strict';
 
-	let data = {
-		title: 'Рабочие',
-		items: [
-			{
-				anchor: 'mail.ru'
-			},
-			{
-				anchor: 'yandex.ru'
-			},
-			{
-				anchor: 'google.com'
-			},
-		]
-	};
+	//import
+	const Menu = window.Menu;
+	const Form = window.Form;
 
-	let menu = new Menu({
+	const menu = new Menu({
 		el: document.querySelector('.js-menu'),
-		data,
+		onPick(item) {
+			console.log(item);
+		},
+		data: {
+			title: 'SINGLE PAGE APPLICATION',
+			items: [
+				{
+					href: 'https://vk.com',
+					anchor: 'vk.com',
+				},
+				{
+					href: 'https://ok.ru',
+					anchor: 'ok.ru',
+				},
+				{
+					href: 'https://yahoo.com',
+					anchor: 'yahoo.com',
+				},
+				{
+					href: 'https://yandex.ru',
+					anchor: 'yandex.ru',
+				},
+			],
+		},
 	});
 
-	let form = new Form({
+	const form = new Form({
 		el: document.querySelector('.js-form'),
+		onSubmit(component) {
+			menu.addItem({
+				href: component.getField('href').value,
+				anchor: component.getField('anchor').value,
+			});
+		},
 	});
+
+	window.menu = menu;
 })();

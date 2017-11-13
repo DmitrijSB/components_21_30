@@ -1,9 +1,7 @@
 (function () {
 	'use strict';
 
-
 	/**
-	 * @class Form
 	 * Компонента "Форма"
 	 */
 	class Form {
@@ -16,8 +14,8 @@
 			this.data = data;
 			this.onSubmit = onSubmit;
 
-			this.render();
 			this._initEvents();
+			this.render();
 		}
 
 		/**
@@ -25,23 +23,23 @@
 		 */
 		render() {
 			this.el.innerHTML = `
-			<form class="form pure-form">
-				<fieldset>
-					<input class="form__input"
-						type="url" name="href"
-						required="required"
-						placeholder="url"/>
-					
-					<input class="form__input"
-						type="text" name="anchor"
-						required="required"
-						placeholder="anchor"/>
-					<button class="form__btn pure-button" type="submit">
-						Save
-					</button>
-					
-				</fieldset>
-			</form>`;
+            <form class="form pure-form">
+                <fieldset>
+                    <input class="form__input"
+                        type="url" name="href"
+                        required="required"
+                        placeholder="url"/>
+                    
+                    <input class="form__input"
+                        type="text" name="anchor"
+                        required="required"
+                        placeholder="anchor"/>
+                    <button class="form__btn pure-button" type="submit">
+                        Save
+                    </button>
+                    
+                </fieldset>
+            </form>`;
 		}
 
 
@@ -76,7 +74,6 @@
 		}
 	}
 
-
-	//export
+	// export
 	window.Form = Form;
 })();

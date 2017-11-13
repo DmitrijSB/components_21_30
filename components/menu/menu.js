@@ -2,7 +2,12 @@
 	'use strict';
 
 	/**
-	 * @class Menu
+	 * @typedef {Item} Тип элемента меню
+	 * @prop {string} href URL
+	 * @prop {string} anchor текст
+	 */
+
+	/**
 	 * Компонента "Меню"
 	 */
 	class Menu {
@@ -16,10 +21,6 @@
 			this.onPick = opts.onPick;
 
 			this.render();
-
-			this.list = this.el.querySelector('.menu__list');
-			this.title = this.el.querySelector('.menu__title');
-
 			this._initEvents();
 		}
 
@@ -28,8 +29,15 @@
 		 * @param {Object} item
 		 */
 		addItem(item) {
+			let el = document.createElement('div');
+			el.innerHTML = this.getItemHtml(item, this.data.items.length);
+			el = el.firstElementChild;
+
+			this.list.append(el);
+			el.addEventListener('animationend', () => el.classList.remove('bounce-in-left'));
+			el.classList.add('bounce-in-left');
+
 			this.data.items.push(item);
-			this.render();
 		}
 
 		/**
@@ -37,51 +45,66 @@
 		 * @param  {Object} removedItem
 		 */
 		removeItem(removedItem) {
-			this.data.items = this.data.items.filter((item, index) => {
-				return index !== removedItem.index;
-			});
+			this.data.items = this.data.items.filter((item, index) => index !== removedItem.index);
 			this.render();
+		}
+
+		/**
+		 * HTML одного объекта меню
+		 * @param {Item} item
+		 * @param {number} index
+		 * @return {string}
+		 */
+		getItemHtml(item, index) {
+			return `
+            <li class="pure-menu-item" data-index="${index}">
+                <a 
+                class="pure-menu-link"
+                href="${item.href}"
+                data-action="pick">
+                    ${item.anchor}
+                </a>
+                <i class="close" data-action="remove"></i>
+            </li>`;
 		}
 
 		/**
 		 * Создаем HTML
 		 */
 		render() {
-			function generateItems (itmes) {
-				return itmes.map( (item, index) => {
-					return `
-						<li class="pure-menu-item" data-index="${index}">
-							<a class="pure-menu-link" href="${item.href}" data-action="pick">
-								${item.anchor}
-							</a>
-							<i class="close" data-action="remove"></i>	
-						</li>`;
-				}).join('');
-			}
+			/**
+			 * Создаем HTML элементов меню
+			 * @param {Array<Item>} itmes
+			 * @return {string}
+			 */
+			const generateItems = (itmes) => itmes.map(this.getItemHtml.bind(this)).join('');
 
 			this.el.innerHTML = `
-				<div class="menu pure-menu custom-restricted-width">
-					<span class="menu__title pure-menu-heading">
-						${this.data.title}
-					</span>
-					<ul class="menu__list pure-menu-list">
-						${generateItems(this.data.items)}
-					</ul>
-				</div>
-			`;
+            <div class="menu pure-menu custom-restricted-width">
+                <span class="menu__title pure-menu-heading">
+                ${this.data.title}
+                </span>
+                <ul class="menu__list pure-menu-list">
+                ${generateItems(this.data.items)}
+                </ul>
+            </div>
+            `;
+
+			this.list = this.el.querySelector('.menu__list');
+			this.title = this.el.querySelector('.menu__title');
 		}
 
 		/**
 		 * Удаления элемента меню
-		 * @param  {HTMLElement} item
+		 * @param  {Element} item
 		 * @private
 		 */
 		_onRemoveClick(item) {
-			const index = parseInt(item.parentNode.dataset.index, 10);
+			const el = /** @type {Element} */ item.parentNode;
 
-			this.removeItem({
-				index,
-			});
+			const index = parseInt(item.parentNode.dataset.index, 10);
+			el.addEventListener('animationend', this.removeItem.bind(this, {index}));
+			el.classList.add('bounce-out-right');
 		}
 
 		/**
@@ -122,5 +145,4 @@
 
 	// Export
 	window.Menu = Menu;
-
 })(window);

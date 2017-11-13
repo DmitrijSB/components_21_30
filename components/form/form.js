@@ -60,6 +60,8 @@
 			this.el.addEventListener('submit', this._onSubmit.bind(this));
 		}
 
+		// [ onSubmit ]
+		// [ [onSubmit] [] [] ] [] [] [] []
 
 		/**
 		 * Отправка данных формы
@@ -69,8 +71,27 @@
 		_onSubmit(event) {
 			event.preventDefault();
 
-			this.onSubmit(this);
+			this.onSubmit && this.onSubmit(this);
+
 			event.target.reset();
+		}
+
+		/**
+		 * Эмитит событие
+		 */
+		trigger(eventName, eventData) {
+			const event = new CustomEvent(eventName, {
+				bubbles: true,
+				detail: eventData,
+			});
+
+
+			this.el.dispatchEvent(event);
+		}
+
+
+		on(eventName, callback) {
+			this.el.addEventListener(eventName, callback);
 		}
 	}
 

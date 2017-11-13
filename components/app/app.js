@@ -17,6 +17,10 @@
 			const menu = new Menu({
 				el: document.querySelector('.js-menu'),
 
+				onRemove() {
+
+				},
+
 				onPick(item) {
 					console.log(item);
 				},
@@ -44,9 +48,9 @@
 				},
 			});
 
-
 			const form = new Form({ // eslint-disable-line no-unused-vars
 				el: el.querySelector('.js-form'),
+
 				onSubmit(component) {
 					menu.addItem({
 						href: component.getField('href').value,

@@ -18,7 +18,9 @@
 		constructor(opts) {
 			this.el = opts.el;
 			this.data = opts.data;
+
 			this.onPick = opts.onPick;
+			this.onRemove = opts.onRemove;
 
 			this.render();
 			this._initEvents();
@@ -47,6 +49,8 @@
 		removeItem(removedItem) {
 			this.data.items = this.data.items.filter((item, index) => index !== removedItem.index);
 			this.render();
+
+			this.onRemove && this.onRemove(removedItem);
 		}
 
 		/**
@@ -112,7 +116,7 @@
 		 * @param  {HTMLElement} item
 		 */
 		_onPickClick(item) {
-			this.onPick(item);
+			this.onPick && this.onPick(item);
 		}
 
 		/**

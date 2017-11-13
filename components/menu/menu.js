@@ -1,6 +1,10 @@
 (function () {
 	'use strict';
 
+	const template = window.menuTemplate;
+	const templateItem = window.menuItemTemplate;
+
+
 	/**
 	 * @typedef {Item} Тип элемента меню
 	 * @prop {string} href URL
@@ -60,16 +64,10 @@
 		 * @return {string}
 		 */
 		getItemHtml(item, index) {
-			return `
-            <li class="pure-menu-item" data-index="${index}">
-                <a 
-                class="pure-menu-link"
-                href="${item.href}"
-                data-action="pick">
-                    ${item.anchor}
-                </a>
-                <i class="close" data-action="remove"></i>
-            </li>`;
+			return templateItem({
+				item,
+				index,
+			});
 		}
 
 		/**
@@ -81,18 +79,11 @@
 			 * @param {Array<Item>} itmes
 			 * @return {string}
 			 */
-			const generateItems = (itmes) => itmes.map(this.getItemHtml.bind(this)).join('');
 
-			this.el.innerHTML = `
-            <div class="menu pure-menu custom-restricted-width">
-                <span class="menu__title pure-menu-heading">
-                ${this.data.title}
-                </span>
-                <ul class="menu__list pure-menu-list">
-                ${generateItems(this.data.items)}
-                </ul>
-            </div>
-            `;
+			this.el.innerHTML = template({
+				title: 'Проверка звука',
+				items: this.data.items,
+			});
 
 			this.list = this.el.querySelector('.menu__list');
 			this.title = this.el.querySelector('.menu__title');

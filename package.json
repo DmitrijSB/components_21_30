@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "static-server .",
     "lint": "eslint components/**/*.js",
+    "pug": "pug components/{**/**,**}/*.pug --no-debug --client --name-after-file --extension=pug.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +23,8 @@
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^2.8.0",
+    "pug": "^2.0.0-rc.4",
+    "pug-cli": "^1.0.0-alpha6",
     "static-server": "^2.0.5"
   }
 }

@@ -52,8 +52,8 @@
 				el: el.querySelector('.js-form'),
 			});
 
-			form.on('add', ({details}) => {
-				menu.addItem(details);
+			form.on('add', ({detail}) => {
+				menu.addItem(detail);
 			});
 
 			window.menu = menu;

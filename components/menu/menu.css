@@ -1,65 +1,48 @@
 .menu {
-    position: relative;
-    padding-left: 0.9rem;
+    padding: 10px;
 }
 
 .menu__title {
-    position: relative;
-    margin: 0;
-    font-size: 1em;
-    cursor: pointer;
-    border-bottom-width: 0;
-    border-color: #aaa;
-    border-color: rgba(0,0,0,0.3);
-    border-bottom-style: dotted;
-    color: #000;
+    background-image: url(https://learn.javascript.ru/img/sitetoolbar__logo_small.svg);
+    background-position: 0px -9px;
+    background-repeat: no-repeat;
+
+    text-align: center;
+    font-size: 19px;
+    padding-left: 90px;
 }
 
-.menu_close .menu__title {
-    border-bottom-width: 1px;
-}
-
-.menu__title:before {
-    content: '▼';
+.close {
     position: absolute;
-    right: 100%;
-    top: 0.2em;
-    display: inline-block;
-    width: 0.9rem;
-    color: tomato;
-    font-size: 0.65em;
-    vertical-align: middle;
-}
-
-.menu_close .menu__title:before {
-    content: '▶';
-    color: green;
-}
-
-.menu__list {
-    margin-top: 0.55em;
-    margin-bottom: 0;
-    padding-left: 0;
-    list-style: none;
-}
-
-.menu__item {
+    right: 32px;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
     cursor: pointer;
-    color: #00f;
-    text-decoration: none;
-    margin-top: 0.35em;
 }
-
-.menu__item_selected {
-    color: tomato;
+.close:hover {
+    opacity: 1;
 }
-
-.menu_close .menu__list {
-    overflow: hidden;
+.close:before, .close:after {
     position: absolute;
-    margin: -1px;
-    padding: 0;
-    width: 1px;
-    height: 1px;
-    border: 0;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
+
+.pure-menu-item .close {
+    display: none;
+}
+
+.pure-menu-item:hover .close {
+    display: block;
 }

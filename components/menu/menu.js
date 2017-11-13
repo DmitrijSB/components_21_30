@@ -1,4 +1,4 @@
-(function() {
+(function () {
 	'use strict';
 
 	/**
@@ -6,7 +6,6 @@
 	 * Компонента "Меню"
 	 */
 	class Menu {
-
 		/**
 		 * @constructor
 		 * @param  {Object} opts
@@ -28,7 +27,7 @@
 		 * Добавляем элемент меню
 		 * @param {Object} item
 		 */
-		addItem (item) {
+		addItem(item) {
 			this.data.items.push(item);
 			this.render();
 		}
@@ -37,7 +36,7 @@
 		 * Удаляем пункт меню из данных
 		 * @param  {Object} removedItem
 		 */
-		removeItem (removedItem) {
+		removeItem(removedItem) {
 			this.data.items = this.data.items.filter((item, index) => {
 				return index !== removedItem.index;
 			});
@@ -47,7 +46,7 @@
 		/**
 		 * Создаем HTML
 		 */
-		render () {
+		render() {
 			function generateItems (itmes) {
 				return itmes.map( (item, index) => {
 					return `
@@ -73,53 +72,52 @@
 		}
 
 		/**
-		* Удаления элемента меню
-		* @param  {HTMLElement} item
-		* @private
-		*/
+		 * Удаления элемента меню
+		 * @param  {HTMLElement} item
+		 * @private
+		 */
 		_onRemoveClick(item) {
-			let index = parseInt(item.parentNode.dataset.index, 10);
+			const index = parseInt(item.parentNode.dataset.index, 10);
 
 			this.removeItem({
-				index
+				index,
 			});
 		}
 
 		/**
-		* Выбор элемента меню
-		* @param  {HTMLElement} item
-		*/
+		 * Выбор элемента меню
+		 * @param  {HTMLElement} item
+		 */
 		_onPickClick(item) {
 			this.onPick(item);
 		}
 
 		/**
-		* Развешиваем события
-		*/
+		 * Развешиваем события
+		 */
 		_initEvents() {
 			this.el.addEventListener('click', this._onClick.bind(this));
 		}
 
 		/**
-		* Клик в любую область меню
-		* @param {Event} event
-		* @private
-		*/
+		 * Клик в любую область меню
+		 * @param {Event} event
+		 * @private
+		 */
 		_onClick(event) {
 			event.preventDefault();
-			let item = event.target;
+			const item = event.target;
 
 			switch (item.dataset.action) {
 				case 'remove':
-				this._onRemoveClick(item);
-				break;
+					this._onRemoveClick(item);
+					break;
 
 				case 'pick':
-				this._onPickClick(item);
-				break;
+					this._onPickClick(item);
+					break;
 			}
 		}
-
 	}
 
 	// Export

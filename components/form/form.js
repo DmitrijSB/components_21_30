@@ -73,6 +73,11 @@
 
 			this.onSubmit && this.onSubmit(this);
 
+			this.trigger('add', {
+				href: this.getField('href').value,
+				anchor: this.getField('anchor').value,
+			});
+
 			event.target.reset();
 		}
 
@@ -81,10 +86,8 @@
 		 */
 		trigger(eventName, eventData) {
 			const event = new CustomEvent(eventName, {
-				bubbles: true,
 				detail: eventData,
 			});
-
 
 			this.el.dispatchEvent(event);
 		}

@@ -50,13 +50,10 @@
 
 			const form = new Form({ // eslint-disable-line no-unused-vars
 				el: el.querySelector('.js-form'),
+			});
 
-				onSubmit(component) {
-					menu.addItem({
-						href: component.getField('href').value,
-						anchor: component.getField('anchor').value,
-					});
-				},
+			form.on('add', ({details}) => {
+				menu.addItem(details);
 			});
 
 			window.menu = menu;

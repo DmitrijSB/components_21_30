@@ -71,6 +71,22 @@
 		}
 
 		/**
+		 * Возвращает HTML элемент списка меню
+		 * @return {HTMLUListElement}
+		 */
+		get list() {
+			return this.el.querySelector('.menu__list');
+		}
+
+		/**
+		 * Возвращает HTML элемент заголовка меню
+		 * @return {HTMLUListElement}
+		 */
+		get title() {
+			return this.el.querySelector('.menu__title');
+		}
+
+		/**
 		 * Создаем HTML
 		 */
 		render() {
@@ -84,9 +100,6 @@
 				title: 'Проверка звука',
 				items: this.data.items,
 			});
-
-			this.list = this.el.querySelector('.menu__list');
-			this.title = this.el.querySelector('.menu__title');
 		}
 
 		/**

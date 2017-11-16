@@ -30,6 +30,10 @@
 			this._initEvents();
 		}
 
+		getData() {
+			return this.data;
+		}
+
 		setData(data) {
 			this.data = data;
 			this.render();

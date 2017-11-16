@@ -5,6 +5,8 @@
 	const Menu = window.Menu;
 	const Form = window.Form;
 
+	const URL = 'https://components-21-30.firebaseio.com/menu/-Kz5NeJk9exl8TnG0ZZf.json';
+
 	/**
 	 * Компонента "Форма"
 	 */
@@ -34,16 +36,31 @@
 
 			this.form.on('add', ({detail}) => {
 				this.menu.addItem(detail);
+				this.addItem();
 			});
 
-			const promise = this.fetchData();
+			this.fetchData()
+				.then((result) => {
+					this.menu.setData(result);
+				})
+				.catch((err) => {
+					console.log('ОШИБКА В ПРОМИСЕ');
+				});
+		}
 
-			promise.then((result) => {
-				this.menu.setData(result);
-			});
+		addItem() {
+			return this.request('PUT', URL, this.menu.getData());
 		}
 
 		fetchData() {
+			return this.request('GET', URL);
+		}
+
+		saveData() {
+			return this.request('POST', URL, this.menu.getData());
+		}
+
+		request(method, url, data) {
 			return new Promise((resolve, reject) => {
 				const xhr = new XMLHttpRequest();
 
@@ -51,7 +68,7 @@
 					console.log(evt);
 				});
 
-				xhr.addEventListener('load', (evt) => {
+				xhr.addEventListener('load', () => {
 					if (xhr.status === 200) {
 						const result = JSON.parse(xhr.responseText);
 
@@ -63,9 +80,12 @@
 					}
 				});
 
-				xhr.open('GET', '/mocks/menu.mock.json', true);
+				xhr.open(method, url, true);
 
-				xhr.send();
+
+				const dataJSON = data ? JSON.stringify(data) : null;
+
+				xhr.send(dataJSON);
 			});
 		}
 	}

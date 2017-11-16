@@ -1,0 +1,21 @@
+{
+  "title": "SINGLE PAGE APPLICATION",
+  "items": [
+    {
+      "href": "https://vk.com",
+      "anchor": "vk.com"
+    },
+    {
+      "href": "https://ok.ru",
+      "anchor": "ok.ru"
+    },
+    {
+      "href": "https://yahoo.com",
+      "anchor": "yahoo.com"
+    },
+    {
+      "href": "https://yandex.ru",
+      "anchor": "yandex.ru"
+    }
+  ]
+}

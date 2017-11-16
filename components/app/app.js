@@ -14,7 +14,7 @@
 		 * @param {HTMLElement} param0.el
 		 */
 		constructor({el}) {
-			const menu = new Menu({
+			this.menu = new Menu({
 				el: document.querySelector('.js-menu'),
 
 				onRemove() {
@@ -25,38 +25,48 @@
 					console.log(item);
 				},
 
-				data: {
-					title: 'SINGLE PAGE APPLICATION',
-					items: [
-						{
-							href: 'https://vk.com',
-							anchor: 'vk.com',
-						},
-						{
-							href: 'https://ok.ru',
-							anchor: 'ok.ru',
-						},
-						{
-							href: 'https://yahoo.com',
-							anchor: 'yahoo.com',
-						},
-						{
-							href: 'https://yandex.ru',
-							anchor: 'yandex.ru',
-						},
-					],
-				},
+				data: {},
 			});
 
-			const form = new Form({ // eslint-disable-line no-unused-vars
+			this.form = new Form({ // eslint-disable-line no-unused-vars
 				el: el.querySelector('.js-form'),
 			});
 
-			form.on('add', ({detail}) => {
-				menu.addItem(detail);
+			this.form.on('add', ({detail}) => {
+				this.menu.addItem(detail);
 			});
 
-			window.menu = menu;
+			const promise = this.fetchData();
+
+			promise.then((result) => {
+				this.menu.setData(result);
+			});
+		}
+
+		fetchData() {
+			return new Promise((resolve, reject) => {
+				const xhr = new XMLHttpRequest();
+
+				xhr.addEventListener('readystatechange', (evt) => {
+					console.log(evt);
+				});
+
+				xhr.addEventListener('load', (evt) => {
+					if (xhr.status === 200) {
+						const result = JSON.parse(xhr.responseText);
+
+						resolve(result);
+					} else {
+						console.error('Что-то пошло не так!');
+
+						reject(xhr);
+					}
+				});
+
+				xhr.open('GET', '/mocks/menu.mock.json', true);
+
+				xhr.send();
+			});
 		}
 	}
 

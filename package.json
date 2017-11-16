@@ -4,7 +4,7 @@
   "description": "Учебный проект",
   "main": "index.js",
   "scripts": {
-    "serve": "static-server .",
+    "start": "static-server .",
     "lint": "eslint components/**/*.js",
     "pug": "pug components/{**/**,**}/*.pug --no-debug --client --name-after-file --extension=pug.js",
     "test": "echo \"Error: no test specified\" && exit 1"

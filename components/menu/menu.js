@@ -26,8 +26,13 @@
 			this.onPick = opts.onPick;
 			this.onRemove = opts.onRemove;
 
-			this.render();
+			// this.render();
 			this._initEvents();
+		}
+
+		setData(data) {
+			this.data = data;
+			this.render();
 		}
 
 		/**
@@ -97,7 +102,7 @@
 			 */
 
 			this.el.innerHTML = template({
-				title: 'Проверка звука',
+				title: this.data.title,
 				items: this.data.items,
 			});
 		}
